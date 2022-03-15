@@ -1,0 +1,18 @@
+
+
+.w-400{
+    min-height: 400px;
+}
+.fs-xs{
+    font-size: 1rem ;
+}
+
+.online{
+    width: 10px ;
+    height: 10px ;
+    background: green ;
+    border-radius: 50% ;
+}
+.bxs-user-plus{
+    font-size: 5rem !important ;
+}
