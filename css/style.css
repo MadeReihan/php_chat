@@ -1,7 +1,9 @@
+.vh-100 {
+	min-height: 100vh;
+}
 
-
-.w-400{
-    min-height: 400px;
+.w-400 {
+	width: 400px;
 }
 .fs-xs{
     font-size: 1rem ;
@@ -16,3 +18,68 @@
 .bxs-user-plus{
     font-size: 5rem !important ;
 }
+
+.w-10 {
+	width: 10%;
+}
+
+a {
+	text-decoration: none;
+}
+
+.w-15{
+    width: 15%
+}
+
+.fs-big{
+    font-size: 5rem !important ;
+}
+
+.fs-sm{
+    font-size: 1.4rem !important ;
+}
+
+small{
+    color: #bbb;
+    font-size: 0.7rem;
+    text-align: right;
+}
+
+.chat-box{
+    overflow-y: auto;
+    max-height: 50vh;
+}
+
+.rtext{
+    width: 65%;
+    background-color: #f8f9fa;
+    color: #444;
+
+}
+
+.ltext{
+    width: 65%;
+    background-color: #3289c8;
+    color: #fff;
+}
+
+*::-webkit-scrollbar{
+    width: 3px;
+}
+
+*::-webkit-scrollbar-track{
+    background: #f1f1f1;
+}
+
+*::-webkit-scrollbar-thumb{
+    background: #aaa;
+}
+*::-webkit-scrollbar-thumb:hover{
+    background: #3289c8;
+}
+
+
+textarea{
+    resize: none;
+}
+

@@ -32,7 +32,7 @@
                     <div class="d-flex mb-3 p-3 bg-light justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
                                 <img src="uploads/<?= $user['p_p'] ?>" class=" rounded-2" width="100px" height="100px">
-                                <h5 class="fs-xs m-2 me-5" ><?= $user['name']; ?></h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <h5 class="fs-xs m-2 me-5" ><?= $user['name']; ?></h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <a href="logout.php" class="btn btn-dark">Logout</a>
                     </div>
