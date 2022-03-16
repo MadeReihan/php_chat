@@ -7,6 +7,7 @@
         include 'app/helpers/user.php';
         include 'app/helpers/conversations.php';
         include 'app/helpers/timeAgo.php';
+        include 'app/helpers/last_chat.php';
         $user = getUser($_SESSION['username'],$conn);
         $conversations = getConversations($user['user_id'],$conn);
         
@@ -32,7 +33,7 @@
                     <div class="d-flex mb-3 p-3 bg-light justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
                                 <img src="uploads/<?= $user['p_p'] ?>" class=" rounded-2" width="100px" height="100px">
-                                <h5 class="fs-xs m-2 me-5" ><?= $user['name']; ?></h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <h5 class="fs-xs m-2 me-5" ><?= $user['name']; ?></h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <a href="logout.php" class="btn btn-dark">Logout</a>
                     </div>
@@ -49,6 +50,9 @@
                                         <div class="d-flex align-items-center">
                                             <img src="uploads/<?= $conversation['p_p'] ?>" class=" rounded-2" width="50px" height="50px">
                                             <h5 class="fs-xs m-2"><?= $conversation['name'] ?></h5>
+                                            <small class="text-dark">
+                                                <?php echo lastChat($_SESSION['user_id'], $conversation['user_id'], $conn); ?>
+                                            </small>
                                         </div>
                                         <?php if(last_seen($conversation['last_seen']) == "Active"){ ?>
 

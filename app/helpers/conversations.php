@@ -1,7 +1,9 @@
 <?php 
 
     function getConversations($user_id,$conn){
-        $sql = "SELECT * FROM conversations WHERE user_1=? OR user_2=? ORDER BY conversation_id DESC";
+        $sql = "SELECT * FROM conversations
+        WHERE user_1=? OR user_2=?
+        ORDER BY conversation_id DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$user_id,$user_id]);
 
@@ -10,11 +12,13 @@
             $user_data = [];
             foreach($conversations as $conversation){
                 if($conversation['user_1'] == $user_id){
-                    $sql2 = "SELECT name, username, p_p, last_seen FROM users WHERE user_id=?";
+                    $sql2 = "SELECT *
+                    FROM users WHERE user_id=?";
                     $stmt2 = $conn->prepare($sql2);
                     $stmt2->execute([$conversation['user_2']]);
                 }else{
-                    $sql2 = "SELECT name, username, p_p, last_seen FROM users WHERE user_id=?";
+                    $sql2 = "SELECT *
+                    FROM users WHERE user_id=?";
                     $stmt2 = $conn->prepare($sql2);
                     $stmt2->execute([$conversation['user_1']]);
                 }

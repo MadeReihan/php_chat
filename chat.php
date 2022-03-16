@@ -7,6 +7,7 @@
         include 'app/helpers/user.php';
         include 'app/helpers/timeAgo.php';
         include 'app/helpers/chat.php';
+        include 'app/helpers/opened.php';
 
         if(!isset($_GET['user'])){
             header("Location: home.php");
@@ -21,6 +22,8 @@
         }
 
         $chats = getChats($_SESSION['user_id'],$chatWith['user_id'],$conn);
+
+        opened($chatWith['user_id'],$chats,$conn);
 
 
 
@@ -50,7 +53,8 @@
                         <div class="online me-1"></div>
                         <small class="d-block p-1 ">Online</small>
                     <?php }else{ ?>
-                        <small class="d-block p-1 "><?= $chatWith['last_seen'] ?></small>
+                        
+                        <small class="d-block p-1 "><span class="font-monospace text-dark">Last seen: </span> <?= last_seen($chatWith['last_seen']) ?></small>
                     <?php } ?>
                 </div>
             </h3>
@@ -58,18 +62,22 @@
 
         <div class="shadow p-4 rounded d-flex flex-column mt-2  chat-box" id="chatBox">
 
-            <?php if(!empty($chats)){ ?>
+            <?php if(!empty($chats)){ 
+                foreach($chats as $chat){
+                    if($chat['from_id'] == $_SESSION['user_id']){ ?>
+                        <p class="rtext align-self-end border rounded p-2 mb-1">
+                            <?= $chat['message'] ?>
+                            <small class="d-block "><?= $chat['created_at'] ?></small>
+                        </p>
+                 <?php } else{ ?>
 
-                <p class="rtext align-self-end border rounded p-2 mb-1">
-                    <!-- <?= $chats['message'] ?> -->
-                    <small class="d-block ">12.00</small>
-                </p>
-    
-                <p class="ltext align-self-start border rounded p-2 mb-1">Hello there
-                    <small class="d-block ">12.00</small>
-                </p>
+                    <p class="ltext align-self-start border rounded p-2 mb-1"><?= $chat['message'] ?>
+                    <small class="d-block "><?= $chat['created_at'] ?></small>
+                    </p>
 
-            <?php }else{ ?>
+                 <?php }
+                }
+             }else{ ?>
 
 
                 <div class="alert alert-info text-center" role="alert">
@@ -115,7 +123,34 @@
                     $("#chatBox").append(data);
                     scrollDown();
                 });
-            })
+            });
+
+            let lastSeenUpdate = function(){
+                    $.get("app/ajax/update_last_seen.php");
+                }
+            lastSeenUpdate();
+
+            setInterval(lastSeenUpdate,10000);
+
+
+
+            // auto update
+            let fechData = function(){
+                $.post("app/ajax/getMessage.php",{
+                    id_2: <?= $chatWith['user_id'] ?>
+
+                },
+                function(data,status){
+                    $("#chatBox").append(data);
+                    if(data != "") scrollDown();
+                    
+                });
+            }
+
+            fechData();
+
+            setInterval(fechData,500);
+            
         
         });
     </script>

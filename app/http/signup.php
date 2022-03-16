@@ -60,11 +60,6 @@
                             header("Location: ../../signup.php?error=$em&&$data");
                             exit;
                         }
-                    }else{
-                        $em = "unkwon error";
-
-                        header("Location: ../../signup.php?error=$em&&$data");
-                        exit;
                     }
 
                 }
